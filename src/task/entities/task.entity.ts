@@ -1,4 +1,4 @@
-import { User } from "src/user/user.entity";
+import { User } from "../../user/user.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 export enum status {
@@ -24,7 +24,7 @@ export class Task {
     })
     status!:status
 
-    @ManyToOne(()=> User, (user)=> user.role)
+    @ManyToOne(()=> User)
     @JoinColumn({name: 'assignedToId'})
     assignedTo!: User
     

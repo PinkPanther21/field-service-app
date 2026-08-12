@@ -13,6 +13,15 @@ export class UserService {
         return this.userRepository.findOne({where: {email}})        
     }
 
+    // users.service.ts
+async findByEmailWithPassword(email: string): Promise<User | null> {
+  return this.userRepository
+    .createQueryBuilder('user')
+    .addSelect('user.password')   // explicitly password mangwao
+    .where('user.email = :email', { email })
+    .getOne();
+}
+
     async createUser(name: string, email: string, hashedPassword:string, role?:string): Promise<User> {
       const user = this.userRepository.create({
         name,
