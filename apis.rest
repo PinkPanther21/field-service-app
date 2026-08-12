@@ -25,8 +25,8 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkODZiNDA4YS04MGEyLTQyOGMtYjhjMC01MjA5MjFjNGZhYzIiLCJuYW1lIjoiSnVuZSIsImVtYWlsIjoiSnVuZXQxMjNAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg2NTI5NDA5LCJleHAiOjE3ODY2MTU4MDl9.DhEUwpsEtFGg8aIizYMeGSkT8z-i_NdqTeTz9eblX3A
 
  {
-    "title": "ADD PAYMENTS",
-    "description": "PAYMENT SECTION MISSING", 
+    "title": "ADD PROFILE PICTURE",
+    "description": "PROFILE PIC MISSING", 
     "assignedTo": "a7f2149b-4690-4b8d-bf66-91048d000114",
     "createdBy": "d86b408a-80a2-428c-b8c0-520921c4fac2"
  }
@@ -36,4 +36,22 @@ GET http://localhost:3000/task
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkODZiNDA4YS04MGEyLTQyOGMtYjhjMC01MjA5MjFjNGZhYzIiLCJuYW1lIjoiSnVuZSIsImVtYWlsIjoiSnVuZXQxMjNAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg2NTI5NDA5LCJleHAiOjE3ODY2MTU4MDl9.DhEUwpsEtFGg8aIizYMeGSkT8z-i_NdqTeTz9eblX3A
 
- 
+###
+GET http://localhost:3000/task/61dd1f62-d0d1-41cd-acc9-a29aaec636b9
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkODZiNDA4YS04MGEyLTQyOGMtYjhjMC01MjA5MjFjNGZhYzIiLCJuYW1lIjoiSnVuZSIsImVtYWlsIjoiSnVuZXQxMjNAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg2NTI5NDA5LCJleHAiOjE3ODY2MTU4MDl9.DhEUwpsEtFGg8aIizYMeGSkT8z-i_NdqTeTz9eblX3A 
+
+###
+PATCH http://localhost:3000/task/3226f398-254d-4589-beb9-19886c61c2fc
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkODZiNDA4YS04MGEyLTQyOGMtYjhjMC01MjA5MjFjNGZhYzIiLCJuYW1lIjoiSnVuZSIsImVtYWlsIjoiSnVuZXQxMjNAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg2NTI5NDA5LCJleHAiOjE3ODY2MTU4MDl9.DhEUwpsEtFGg8aIizYMeGSkT8z-i_NdqTeTz9eblX3A
+
+ {
+    "id":"3226f398-254d-4589-beb9-19886c61c2fc", 
+    "status":"done"
+ }
+
+###
+DELETE http://localhost:3000/task/78de784f-cd3d-4d87-b081-ae89ad861c2d
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkODZiNDA4YS04MGEyLTQyOGMtYjhjMC01MjA5MjFjNGZhYzIiLCJuYW1lIjoiSnVuZSIsImVtYWlsIjoiSnVuZXQxMjNAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg2NTI5NDA5LCJleHAiOjE3ODY2MTU4MDl9.DhEUwpsEtFGg8aIizYMeGSkT8z-i_NdqTeTz9eblX3A  

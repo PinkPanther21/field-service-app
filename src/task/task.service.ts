@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -34,15 +34,35 @@ export class TaskService {
     return this.taskRepo.find({relations: {assignedTo: true,createdBy: true}});
   }
 
-  findOne(id: string) {
-    return `This action returns a #${id} task`;
+  async findOne(id: string) {
+    const task = await this.taskRepo.findOne({
+      where: {id},
+      relations: {
+        assignedTo: true,
+        createdBy: true
+      }
+    });
+    if(!task){
+      throw new NotFoundException("Task Not Found")
+    }
+    return task
   }
 
-  update(id: string, updateTaskDto: UpdateTaskDto) {
-    return `This action updates a #${id} task`;
+  async update(id: string, updateTaskDto: UpdateTaskDto) {
+    const task = await this.taskRepo.update({id}, updateTaskDto)
+    if(task.affected === 0){
+      throw new NotFoundException(`Task wth ${id} not found`)
+    }
+    return this.findOne(id)
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} task`;
+  async remove(id: string) {
+    const task = await this.taskRepo.delete({
+      id
+    })
+    if(task.affected === 0){
+      throw new NotFoundException()
+    }
+   return task
   }
 }
