@@ -15,18 +15,18 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {   
-    "email":"Junet123@gmail.com",
+    "email":"jennie123@gmail.com",
     "password": "demo123"
 }
 
 ###
 POST http://localhost:3000/task/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkODZiNDA4YS04MGEyLTQyOGMtYjhjMC01MjA5MjFjNGZhYzIiLCJuYW1lIjoiSnVuZSIsImVtYWlsIjoiSnVuZXQxMjNAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg2NTI5NDA5LCJleHAiOjE3ODY2MTU4MDl9.DhEUwpsEtFGg8aIizYMeGSkT8z-i_NdqTeTz9eblX3A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkODZiNDA4YS04MGEyLTQyOGMtYjhjMC01MjA5MjFjNGZhYzIiLCJuYW1lIjoiSnVuZSIsImVtYWlsIjoiSnVuZXQxMjNAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg2NjA1NzM2LCJleHAiOjE3ODY2OTIxMzZ9._02eM-l0kRgY7vCD3pRJDAgvxKiitfwqPnWlPDmUGiQ
 
  {
-    "title": "ADD PROFILE PICTURE",
-    "description": "PROFILE PIC MISSING", 
+    "title": "WRITE DOCUMENTS",
+    "description": "DOCUMENT IS MISSING IN ATTACHEMENT", 
     "assignedTo": "a7f2149b-4690-4b8d-bf66-91048d000114",
     "createdBy": "d86b408a-80a2-428c-b8c0-520921c4fac2"
  }

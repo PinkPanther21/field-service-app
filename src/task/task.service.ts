@@ -61,8 +61,8 @@ export class TaskService {
       id
     })
     if(task.affected === 0){
-      throw new NotFoundException()
+      throw new NotFoundException('Task not found')
     }
-   return task
+   return {message: 'Task deleted successfully'}
   }
 }
