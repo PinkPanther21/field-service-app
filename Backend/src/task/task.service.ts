@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from './entities/task.entity';
 import { DataSource, Repository } from 'typeorm';
 import { UserService } from 'src/user/user.service';
+import { UserRole } from 'src/user/user.entity';
 
 @Injectable()
 export class TaskService {
@@ -30,8 +31,17 @@ export class TaskService {
     return await this.taskRepo.save(newTask)
   }
 
-  async findAll() {
-    return this.taskRepo.find({relations: {assignedTo: true,createdBy: true}});
+  async findAll(userId: string, userRole: UserRole) {
+    console.log('userId:', userId, 'userRole:', userRole, typeof userRole);
+    if(userRole === 'admin'){
+     return this.taskRepo.find({relations: {assignedTo: true,createdBy: true}});
+    }
+    return this.taskRepo
+  .createQueryBuilder('task')
+  .leftJoinAndSelect('task.assignedTo', 'assignedTo')
+  .leftJoinAndSelect('task.createdBy', 'createdBy')
+  .where('assignedTo.id = :userId', { userId })
+  .getMany();
   }
 
   async findOne(id: string) {

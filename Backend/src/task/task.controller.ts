@@ -19,8 +19,10 @@ export class TaskController {
   }
 
   @Get()
-  findAll() {
-    return this.taskService.findAll();
+  findAll(@Req() req:any) {
+    const userId = req?.user?.sub
+    const userRole = req?.user?.role
+    return this.taskService.findAll(userId,userRole);
   }
 
   @Get(':id')
