@@ -5,21 +5,15 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { AuthGuard } from './guards/auth.guard';
 import { UserModule } from 'src/user/user.module';
+import { GuardsModule } from './guards/guards.module';
 
 @Module({
   imports: [
     UserModule,
-    JwtModule.registerAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET'),
-        signOptions: { expiresIn: configService.get<string>('JWT_EXPIRES_IN') as any },
-      }),
-    }),
+    GuardsModule
   ],
   providers: [AuthService, AuthGuard],
   controllers: [AuthController],
-  exports: [AuthService, AuthGuard, JwtModule],
+  exports: [AuthService, AuthGuard],
 })
 export class AuthModule {}

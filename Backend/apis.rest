@@ -15,7 +15,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {   
-    "email":"Ali123@gmail.com",
+    "email":"ali123@gmail.com",
     "password": "demo123"
 }
 
@@ -55,3 +55,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkODZiNDA4Y
 DELETE http://localhost:3000/task/78de784f-cd3d-4d87-b081-ae89ad861c2d
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkODZiNDA4YS04MGEyLTQyOGMtYjhjMC01MjA5MjFjNGZhYzIiLCJuYW1lIjoiSnVuZSIsImVtYWlsIjoiSnVuZXQxMjNAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg2NTI5NDA5LCJleHAiOjE3ODY2MTU4MDl9.DhEUwpsEtFGg8aIizYMeGSkT8z-i_NdqTeTz9eblX3A  
+
+###
+GET http://localhost:3000/user/worker
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0ZTNhOWQyYi1iYzg0LTQ4MzctOWMwYi1lN2UwNzBjZTgwMDIiLCJuYW1lIjoiQWxpIiwiZW1haWwiOiJhbGkxMjNAZ21haWwuY29tIiwicm9sZSI6IndvcmtlciIsImlhdCI6MTc4Njg3MzM3MiwiZXhwIjoxNzg2OTU5NzcyfQ.4MBQ4pPiGnGIjkqwNYDZEzpGLZljDzHlXLe_0JaLw9k

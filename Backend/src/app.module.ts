@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TaskModule } from './task/task.module';
 
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),

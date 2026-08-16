@@ -5,9 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Task } from './entities/task.entity';
 import { UserModule } from 'src/user/user.module';
 import { AuthModule } from 'src/auth/auth.module';
+import { GuardsModule } from 'src/auth/guards/guards.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Task]), UserModule,AuthModule],
+  imports: [TypeOrmModule.forFeature([Task]), UserModule,GuardsModule],
   controllers: [TaskController],
   providers: [TaskService],
 })

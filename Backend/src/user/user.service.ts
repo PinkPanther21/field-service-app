@@ -1,38 +1,50 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './user.entity';
+import { User, UserRole } from './user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
-     constructor(@InjectRepository(User)
-     private userRepository: Repository<User>,
-    ){}
+  constructor(
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+  ) {}
 
-    async findByEmail(email: string): Promise<User | null>{
-        return this.userRepository.findOne({where: {email}})        
-    }
+  async findByEmail(email: string): Promise<User | null> {
+    return this.userRepository.findOne({ where: { email } });
+  }
 
-    // users.service.ts
-async findByEmailWithPassword(email: string): Promise<User | null> {
-  return this.userRepository
-    .createQueryBuilder('user')
-    .addSelect('user.password')   // explicitly password mangwao
-    .where('user.email = :email', { email })
-    .getOne();
-}
+  // users.service.ts
+  async findByEmailWithPassword(email: string): Promise<User | null> {
+    return this.userRepository
+      .createQueryBuilder('user')
+      .addSelect('user.password') // explicitly password mangwao
+      .where('user.email = :email', { email })
+      .getOne();
+  }
 
-    async createUser(name: string, email: string, hashedPassword:string, role?:string): Promise<User> {
-      const user = this.userRepository.create({
-        name,
-        email,
-        password: hashedPassword,
-        role: role as any,
-      })
-      return this.userRepository.save(user)
-    }
-    
-    async findById(id: string):Promise<User | null>{
-        return this.userRepository.findOne({where: {id}})
-    }
+  async createUser(
+    name: string,
+    email: string,
+    hashedPassword: string,
+    role?: string,
+  ): Promise<User> {
+    const user = this.userRepository.create({
+      name,
+      email,
+      password: hashedPassword,
+      role: role as any,
+    });
+    return this.userRepository.save(user);
+  }
+
+  async findById(id: string): Promise<User | null> {
+    return this.userRepository.findOne({ where: { id } });
+  }
+
+  async findAllWorkers(){
+    return this.userRepository.find({where:{
+      role: UserRole.WORKER
+    }})
+  }
 }
