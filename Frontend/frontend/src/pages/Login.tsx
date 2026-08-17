@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
+import team from '../assets/pngegg.png'
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -56,7 +57,21 @@ const Login = () => {
   };
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-sky-300 to-sky-500">
+      <div className="min-h-screen flex  items-center gap-10 justify-center bg-linear-to-bl from-violet-500 to-fuchsia-600">
+        <div className="hidden lg:flex w-1/4 items-center justify-center">
+        <img 
+            src={team}
+            alt="App illustration" 
+            className="w-75 h-full object-cover"
+        />
+    </div>
+
+     <div className="w-full lg:w-1/2 flex flex-col items-center justify-center p-6">
+        <div className="overflow-hidden mb-8">
+          <h2 className="text-6xl md:text-3xl sm:text-2xl font-semibold text-white whitespace-nowrap overflow-hidden border-r-4 border-white animate-typing">
+            Manage your team's tasks, effortlessly.
+          </h2>
+        </div>
         <div className="backdrop-blur-lg bg-white/20 border border-white/30 rounded-2xl shadow-xl p-8 w-full max-w-sm">
           <h1 className="text-2xl font-bold text-white text-center mb-6">
             Welcome Back
@@ -96,6 +111,7 @@ const Login = () => {
           >
             {loading ? "Logging in..." : "Login"}
           </button>
+        </div>
         </div>
       </div>
     </>

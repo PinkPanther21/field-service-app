@@ -2,31 +2,33 @@ import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/co
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt'
+import { RegisterDto } from './dto/register.dto';
+import { loginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
     constructor(private userService: UserService, private jwtService: JwtService){}
 
-    async register(name: string, email: string, password: string, role?:string){
-        const normalizedEmail = email.toLowerCase().trim();
+    async register(registerDto: RegisterDto){
+        const normalizedEmail = registerDto.email.toLowerCase().trim();
         const existingUser = await this.userService.findByEmail(normalizedEmail)
         if(existingUser){
             throw new ConflictException('Email already registered')
         }
         const saltRounds = 10
-        const hashedPassword = await bcrypt.hash(password,saltRounds)
-        const user = await this.userService.createUser(name, normalizedEmail, hashedPassword,role)
+        const hashedPassword = await bcrypt.hash(registerDto.password,saltRounds)
+        const user = await this.userService.createUser(registerDto.name, normalizedEmail, hashedPassword)
         const { password: _, ...result} = user
         return result
     }
-    async login(email: string, password: string){
-        const normalizedEmail = email.toLowerCase().trim();
+    async login(loginDto: loginDto){
+        const normalizedEmail = loginDto.email.toLowerCase().trim();
         const user = await this.userService.findByEmailWithPassword(normalizedEmail)
         if(!user){
             throw new UnauthorizedException('Invalid credentials')
         }
 
-        const isPasswordValid = await bcrypt.compare(password, user.password)
+        const isPasswordValid = await bcrypt.compare(loginDto.password, user.password)
         if(!isPasswordValid){
             throw new UnauthorizedException('Invalid credentials')
         }

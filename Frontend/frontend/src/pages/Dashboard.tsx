@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import type { Task } from "../types";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -44,11 +45,17 @@ const Dashboard = () => {
     }
   };
 
+  const handleDelete = async (taskId: string) => {
+    try {
+      await api.delete(`/task/${taskId}`);
+      setTask((prevTask) => prevTask.filter((t) => t.id !== taskId));
+    } catch (error) {
+      console.log("Error deleting task:", error);
+    }
+  };
   return (
     <div className="min-h-screen flex flex-col items-center bg-linear-to-br from-sky-300 to-sky-500 p-6">
-      <h1 className="text-4xl text-center font-semibold text-white mt-6 mb-2">
-        Welcome, {user?.name}
-      </h1>
+      <Navbar />
 
       <div className="w-full max-w-2xl mt-6">
         <div className="flex justify-around">
@@ -94,6 +101,9 @@ const Dashboard = () => {
               >
                 {t.status}
               </p>
+            )}
+            {user?.role === "admin" && (
+              <button onClick={() => handleDelete(t.id)}>Delete</button>
             )}
           </div>
         ))}
