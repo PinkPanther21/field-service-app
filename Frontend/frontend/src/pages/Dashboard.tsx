@@ -54,59 +54,70 @@ const Dashboard = () => {
     }
   };
   return (
-    <div className="min-h-screen flex flex-col items-center bg-linear-to-br from-sky-300 to-sky-500 p-6">
+    <div className="min-h-screen flex flex-col p-6 bg-linear-to-bl from-violet-500 to-fuchsia-600">
       <Navbar />
 
-      <div className="w-full max-w-2xl mt-6">
-        <div className="flex justify-around">
+      <div className="w-full max-w-7xl mt-6">
+        <div className="flex justify-between">
           <h2 className="text-xl font-semibold text-white mb-4">
             Task For The Day
           </h2>
           {user?.role === "admin" && (
             <button
               onClick={() => navigate("/dashboard/create-task")}
-              className="text-white font-semibold"
+              className="text-white font-semibold cursor-pointer transition-transform duration-200 hover:scale-110"
             >
               + Create Task
             </button>
           )}
         </div>
-        {task.map((t) => (
-          <div
-            key={t.id}
-            className="w-full mt-4 rounded-2xl flex items-center justify-between px-6 py-5 bg-white/30 backdrop-blur-md border border-white/30"
-          >
-            <div className="flex flex-col gap-3 justify-center">
-              <p className="text-xl font-semibold text-white">{t.title}</p>
-              <h3 className="text-sm text-white font-bold text-shadow-black">
-                {t.assignedTo.name}
-              </h3>
+        <div className="w-full max-w-6xl mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {task.map((t) => (
+            <div
+              key={t.id}
+              className="rounded-2xl flex flex-col justify-between p-6 bg-white/30 backdrop-blur-md border border-white/30 hover:scale-105 transition-transform duration-200 cursor-pointer"
+            >
+              <div>
+                <p className="text-xl font-semibold text-white mb-2">
+                  {t.title}
+                </p>
+                <p className="text-sm text-white/80">{t.description}</p>
+                <p className="text-sm text-white font-medium mt-2">
+                  Assigned to: {t.assignedTo.name}
+                </p>
+              </div>
+              <div className="mt-4">
+                {user?.role === "worker" ? (
+                  <select
+                    value={t.status}
+                    onChange={(e) =>
+                      handleStatusUpdate(t.id, e.target.value as Task["status"])
+                    }
+                    className={`px-4 py-1 border rounded-full text-sm font-medium ${statusStyles[t.status]}`}
+                  >
+                    <option value="pending">Pending</option>
+                    <option value="in_progress">In Progress</option>
+                    <option value="done">Done</option>
+                  </select>
+                ) : (
+                  <p
+                    className={`px-4 py-1 border rounded-full text-sm font-medium ${statusStyles[t.status]}`}
+                  >
+                    {t.status}
+                  </p>
+                )}
+              </div>
+              {user?.role === "admin" && (
+                <button
+                  onClick={() => handleDelete(t.id)}
+                  className="mt-4 w-full px-4 py-2 rounded-lg bg-red-500/80 hover:bg-red-500 text-white text-sm font-medium transition ease-in-out cursor-pointer"
+                >
+                  Delete
+                </button>
+              )}
             </div>
-
-            {user?.role === "worker" ? (
-              <select
-                value={t.status}
-                onChange={(e) =>
-                  handleStatusUpdate(t.id, e.target.value as Task["status"])
-                }
-                className={`px-4 py-1 border rounded-full text-sm font-medium ${statusStyles[t.status]}`}
-              >
-                <option value="pending">Pending</option>
-                <option value="in_progress">In Progress</option>
-                <option value="done">Done</option>
-              </select>
-            ) : (
-              <p
-                className={`px-4 py-1 border rounded-full text-sm font-medium ${statusStyles[t.status]}`}
-              >
-                {t.status}
-              </p>
-            )}
-            {user?.role === "admin" && (
-              <button onClick={() => handleDelete(t.id)}>Delete</button>
-            )}
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
