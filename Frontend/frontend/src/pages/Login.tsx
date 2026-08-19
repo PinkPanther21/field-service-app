@@ -105,9 +105,9 @@ const Login = () => {
 
           <button
             type="button"
-            onClick={handleLogin}
+            onClick={handleLogin}                       
             disabled={loading}
-            className="w-full bg-white/80 hover:bg-white text-sky-700 font-semibold py-2 rounded-lg transition disabled:opacity-50"
+            className="w-full bg-white/80 hover:bg-white text-violet-800 font-semibold py-2 rounded-lg transition disabled:opacity-50 cursor-pointer"
           >
             {loading ? "Logging in..." : "Login"}
           </button>
