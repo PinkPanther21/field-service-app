@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import type { User } from "../types";
 import Navbar from "../components/Navbar";
 import { ArrowLeft } from "lucide-react";
+import toast from "react-hot-toast";
 
 const CreateTask = () => {
   const [workers, setWorkers] = useState<User[]>([]);
@@ -36,11 +37,12 @@ const CreateTask = () => {
       };
       const response = await api.post("/task/create", payload);
       if (response.status === 201) {
+        toast.success('Task created successfully!')
         navigate("/dashboard");
       }
     } catch (error: any) {
       const msg = error.response?.data?.message || "Submission failed";
-      alert("ERROR CAUGHT: " + msg);
+      toast.error(msg)
     }
   };
 
