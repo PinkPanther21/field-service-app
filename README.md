@@ -154,7 +154,7 @@ A successful login returns an `access_token` and a public user object. Registrat
 ### Tasks
 
 | Method | Endpoint | Access | Body or description |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | `GET` | `/task` | Authenticated users | Admins receive all tasks; workers receive tasks assigned to them. |
 | `GET` | `/task/:id` | Authenticated users | Returns one task with assigned and creating users. |
 | `POST` | `/task/create` | Admin | `{ "title": "Install equipment", "description": "...", "assignedTo": "worker-uuid", "createdBy": "admin-uuid" }` |
