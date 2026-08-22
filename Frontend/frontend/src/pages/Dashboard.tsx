@@ -4,19 +4,25 @@ import type { Task } from "../types";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Dashboard = () => {
   const { user } = useAuth();
+  const [loading, setLoading] = useState(true)
   const [task, setTask] = useState<Task[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTask = async () => {
       try {
+        await new Promise(resolve => setTimeout(resolve, 1000));
         const response = await api.get("/task");
         setTask(response.data);
       } catch (error) {
         console.log("Error fetching data: ", error);
+      }
+      finally {
+        setLoading(false)
       }
     };
     fetchTask();
@@ -71,7 +77,10 @@ const Dashboard = () => {
             </button>
           )}
         </div>
-        <div className="w-full max-w-6xl mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <div className="w-full max-w-6xl mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {task.map((t) => (
             <div
               key={t.id}
@@ -118,6 +127,8 @@ const Dashboard = () => {
             </div>
           ))}
         </div>
+        )}
+        
       </div>
     </div>
   );
